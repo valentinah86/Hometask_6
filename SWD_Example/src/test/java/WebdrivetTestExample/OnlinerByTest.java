@@ -45,8 +45,8 @@ public class OnlinerByTest {
 
     @Test (dependsOnMethods = {"openLoginPage"}, enabled = false)
     public void login (){
-        String login = "nalija";
-        String password = "7624589";
+        String login = "someLogin";
+        String password = "somePassword";
 
         WebElement loginField;
         loginField = driver.findElement(new By.ByCssSelector("#auth-container__forms "));
