@@ -34,8 +34,37 @@ public class OnlinerByTest {
     }
 
     @Test
-    public void openCatalog() {
+    public void openLoginPage ()  {
+
+        WebElement openLoginPage;
+        openLoginPage = driver.findElement(By.className("auth-bar__item"));
+        openLoginPage.click();
+    }
+
+    @Test (dependsOnMethods = {"openLoginPage"})
+    public void login (){
+
+        String login = "SOME_USERNAME";    //need to be changed to correct value
+        String password = "SOME_PASSWORD"; //need to be changed to correct value
+
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement loginField = driver.findElement(new By.ByCssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(1) > div:nth-child(1) > input"));
+        loginField.click();
+        loginField.sendKeys(login);
+
+        WebElement passwordField;
+        passwordField = driver.findElement(new By.ByCssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(1) > div:nth-child(2) > input"));
+        passwordField.click();
+        passwordField.sendKeys(password);
+
+        WebElement submitButton = driver.findElement(new By.ByCssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(3) > div > button"));
+        submitButton.click();
+
+    }
+
+    @Test (dependsOnMethods = {"login"})
+    public void openCatalog() {
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         WebElement element = driver.findElement(By.linkText("Каталог"));
         element.click();
     }
