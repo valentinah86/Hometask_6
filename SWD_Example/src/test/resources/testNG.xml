@@ -1,9 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="calc_tests">
-    <test name="calc_test1">
+<suite name="SeleniumWebDriverExample">
+    <test name="OnlinerByTest">
         <classes>
-            <class name="WebdrivetTestExample.OnlinerByTest">
-            </class>
+            <class name="WebdriverTestExample.OnlinerByTest"></class>
         </classes>
     </test>
 
