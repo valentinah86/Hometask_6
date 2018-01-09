@@ -44,20 +44,20 @@ public class OnlinerByTest {
     @Test (dependsOnMethods = {"openLoginPage"})
     public void login (){
 
-        String login = "SOME_USERNAME";    //need to be changed to correct value
-        String password = "SOME_PASSWORD"; //need to be changed to correct value
+        String login = "some login";    //need to be changed to correct value
+        String password = "some password"; //need to be changed to correct value
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement loginField = driver.findElement(new By.ByCssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(1) > div:nth-child(1) > input"));
+        WebElement loginField = driver.findElement(new By.ByCssSelector("div>input[data-field='login']"));
         loginField.click();
         loginField.sendKeys(login);
 
         WebElement passwordField;
-        passwordField = driver.findElement(new By.ByCssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(1) > div:nth-child(2) > input"));
+        passwordField = driver.findElement(new By.ByCssSelector("div>input[type='password']"));
         passwordField.click();
         passwordField.sendKeys(password);
 
-        WebElement submitButton = driver.findElement(new By.ByCssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(3) > div > button"));
+        WebElement submitButton = driver.findElement(new By.ByCssSelector("div>button[type='submit']"));
         submitButton.click();
 
     }
@@ -72,7 +72,7 @@ public class OnlinerByTest {
     @Test (dependsOnMethods = {"openCatalog"})
         public void selectCategory (){
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        List<WebElement> categories = driver.findElements(new By.ByXPath("//*[@id=\"container\"]/div/div/div/div/div/ul"));
+        List<WebElement> categories = driver.findElements(new By.ByXPath("//div[@class='catalog-navigation']/ul"));
         WebElement category = categories.get(random.nextInt(categories.size()));
         category.click();
     }
@@ -80,7 +80,7 @@ public class OnlinerByTest {
     @Test (dependsOnMethods = {"selectCategory"})
 
     public void selectSubCategory(){
-        String XPath = "//*[@id=\"container\"]/div/div/div/div/div/div/div/div/div/div";
+        String XPath = "//div[@class='catalog-navigation-list__category'][@style='display: block;']//div[@class='catalog-navigation-list__aside-item']";
         List<WebElement> subcategories = driver.findElements(new By.ByXPath(XPath));
         List<WebElement> visibleSubcategories = subcategories.stream().filter(WebElement::isDisplayed).collect(Collectors.toList());
         WebElement subcategory = visibleSubcategories.get(random.nextInt(visibleSubcategories.size()));
